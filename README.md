@@ -1,27 +1,30 @@
-- [README](#org4298c41)
-  - [简介](#orgb9cd0d4)
-  - [下载并安装 Texlive](#orgcd7ebb9)
-    - [下载 Tex Live ISO 镜像](#orgaa2e7e8)
-    - [挂载已经下载的 ISO 镜像](#orgcca3e05)
-    - [运行安装程序](#orga844c1e)
-    - [设置安装参数](#org7b618a3)
-    - [安装所需要的 Latex 宏包](#org2db79b1)
-  - [安装并配置 org2ctex](#org77f7c46)
-    - [安装](#orge73a916)
-    - [配置](#orgba02c9a)
-  - [禁用自动设置 LaTeX 字体功能](#orgf4c75e0)
-  - [设置 LaTeX 片断预览功能](#orgeb9d5e5)
-  - [常见错误排查和解决](#org0871581)
-    - [中文目录下的 org 文件无法转换为 pdf 文件](#org5a2abe3)
-    - [缺少必要的 Latex 宏包](#org49f290c)
+- [README](#org7cf6e88)
+  - [简介](#orga5304c4)
+  - [下载并安装 Texlive](#orgde0be27)
+    - [下载 Tex Live ISO 镜像](#org8963659)
+    - [挂载已经下载的 ISO 镜像](#org60183b7)
+    - [运行安装程序](#orgeca7690)
+    - [设置安装参数](#org0eca74c)
+    - [安装所需要的 Latex 宏包](#org845b155)
+  - [安装 org2ctex](#orgc6a8bca)
+  - [配置 org2ctex](#orgab12b1c)
+  - [高级设置](#orga8cb22b)
+    - [如何选择默认 class](#orgc07a9ed)
+    - [如何添加 Latex 宏包](#orgd439e07)
+    - [如何导出 org2ctex 的配置](#orgca0b839)
+    - [如何禁用自动设置 LaTeX 字体功能](#orge984eee)
+  - [如何设置 LaTeX 片断预览功能](#orge7c3598)
+  - [常见错误排查和解决](#orgcadff82)
+    - [中文目录下的 org 文件无法转换为 pdf 文件](#orgdc66df1)
+    - [缺少必要的 Latex 宏包](#orgaa0461f)
 
 
-<a id="org4298c41"></a>
+<a id="org7cf6e88"></a>
 
 # README
 
 
-<a id="orgb9cd0d4"></a>
+<a id="orga5304c4"></a>
 
 ## 简介
 
@@ -38,12 +41,12 @@ org2ctex 是一个 org-mode 工具，它可以帮助 org-mode 中文用户简单
 ![img](./snapshots/org2ctex.gif)
 
 
-<a id="orgcd7ebb9"></a>
+<a id="orgde0be27"></a>
 
 ## 下载并安装 Texlive
 
 
-<a id="orgaa2e7e8"></a>
+<a id="org8963659"></a>
 
 ### 下载 Tex Live ISO 镜像
 
@@ -55,7 +58,7 @@ Tex Live 主站访问速度很慢，建议同学们使用国内镜像，许多 L
 2.  清华大学镜像：<http://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/Images/>
 
 
-<a id="orgcca3e05"></a>
+<a id="org60183b7"></a>
 
 ### 挂载已经下载的 ISO 镜像
 
@@ -63,7 +66,7 @@ Tex Live 主站访问速度很慢，建议同学们使用国内镜像，许多 L
 2.  将 ISO 镜像挂载到 “Z:\\”
 
 
-<a id="orga844c1e"></a>
+<a id="orgeca7690"></a>
 
 ### 运行安装程序
 
@@ -74,7 +77,7 @@ Tex Live 主站访问速度很慢，建议同学们使用国内镜像，许多 L
 注：安装的时候建议关闭杀毒软件。
 
 
-<a id="org7b618a3"></a>
+<a id="org0eca74c"></a>
 
 ### 设置安装参数
 
@@ -83,7 +86,7 @@ Tex Live 主站访问速度很慢，建议同学们使用国内镜像，许多 L
 ![img](./snapshots/advanced-install.gif)
 
 
-<a id="org2db79b1"></a>
+<a id="org845b155"></a>
 
 ### 安装所需要的 Latex 宏包
 
@@ -109,45 +112,64 @@ Tex Live 主站访问速度很慢，建议同学们使用国内镜像，许多 L
             tlmgr install collection-langcjk collection-langchinese ctex ctex-faq bibtex8 environ trimspaces zhnumber wrapfig capt-of latexmk dvipng dvisvgm
 
 
-<a id="org77f7c46"></a>
+<a id="orgc6a8bca"></a>
 
-## 安装并配置 org2ctex
-
-
-<a id="orge73a916"></a>
-
-### 安装
+## 安装 org2ctex
 
 1.  配置 melpa: <http://melpa.org/#/getting-started>
 2.  M-x package-install RET org2ctex RET
 
 
-<a id="orgba02c9a"></a>
+<a id="orgab12b1c"></a>
 
-### 配置
+## 配置 org2ctex
 
     (require 'org2ctex)
     (org2ctex-toggle t)
 
-注：用户可以使用 \`org2ctex-insert-configure-template' 在当前 buffer 的光标处 插入一段 emacs 配置代码, 这段 elisp 代码的功能和 org2ctex 的功能 **基本一样** , 用户可以把这段代码做为自己的 org 中文配置来进一步调整优化。
+
+<a id="orga8cb22b"></a>
+
+## 高级设置
 
 
-<a id="orgf4c75e0"></a>
+<a id="orgc07a9ed"></a>
 
-## 禁用自动设置 LaTeX 字体功能
+### 如何选择默认 class
 
-org2ctex 默认会搜索当前系统 **可用** 的字体，来自动设置 LaTeX 字体， 但字体显示效果未必好，用户可以使用下面的代码来禁用这个功能。
+设置变量 \`org2ctex-latex-default-class', 默认有四个选项 可以选择: "ctexart", "ctexrep", "ctexbook" 和 "beamer", 用户可以通过设置 \`org2ctex-latex-classes' 来添加更多的 class 配置。
+
+
+<a id="orgd439e07"></a>
+
+### 如何添加 Latex 宏包
+
+设置 \`org2ctex-latex-packages-alist', 这个变量的设置方式和 \`org-latex-packages-alist' 一样，请参考 org 手册。
+
+
+<a id="orgca0b839"></a>
+
+### 如何导出 org2ctex 的配置
+
+使用 \`org2ctex-insert-configure-template' 在当前 buffer 的光标处 插入一段 Emacs 配置代码, 这段 elisp 代码的功能和 org2ctex 的功能 **基本一样** , 用户可以把这段代码做为自己的 org 中文配置来进一步调整优化。
+
+
+<a id="orge984eee"></a>
+
+### 如何禁用自动设置 LaTeX 字体功能
+
+Org2ctex 默认会搜索当前系统 **可用** 的字体，来自动设置 LaTeX 字体， 但字体显示效果未必好，用户可以使用下面的代码来禁用这个功能。
 
     (setq org2ctex-latex-fonts nil)
 
 
-<a id="orgeb9d5e5"></a>
+<a id="orge7c3598"></a>
 
-## 设置 LaTeX 片断预览功能
+## 如何设置 LaTeX 片断预览功能
 
-1.  确保 emacs 可以显示 png 文件，具体参考：<ftp://ftp.gnu.org/gnu/emacs/windows/README>
+1.  确保 Emacs 可以显示 png 文件，具体参考：<ftp://ftp.gnu.org/gnu/emacs/windows/README>
 2.  安装 [imagemagick](http://www.imagemagick.org/) 和 [ghostscript](http://ghostscript.com/)
-3.  设置 emacs
+3.  设置 Emacs
 
         ;; (setq org-latex-create-formula-image-program 'dvipng)    ;速度很快，但 *默认* 不支持中文
         (setq org-latex-create-formula-image-program 'imagemagick)  ;速度较慢，但支持中文
@@ -157,12 +179,12 @@ org2ctex 默认会搜索当前系统 **可用** 的字体，来自动设置 LaTe
               (plist-put org-format-latex-options :html-scale 2.5)) ;调整 HTML 文件中 LaTeX 图像的大小
 
 
-<a id="org0871581"></a>
+<a id="orgcadff82"></a>
 
 ## 常见错误排查和解决
 
 
-<a id="org5a2abe3"></a>
+<a id="orgdc66df1"></a>
 
 ### 中文目录下的 org 文件无法转换为 pdf 文件
 
@@ -171,7 +193,7 @@ org2ctex 默认会搜索当前系统 **可用** 的字体，来自动设置 LaTe
     (setq org2ctex-latex-commands '("latexmk -xelatex -gg -pdf %b.tex"))
 
 
-<a id="org49f290c"></a>
+<a id="orgaa0461f"></a>
 
 ### 缺少必要的 Latex 宏包
 
@@ -196,7 +218,7 @@ org2ctex 默认会搜索当前系统 **可用** 的字体，来自动设置 LaTe
             ! LaTeX Error: File `wrapfig.sty' not found.
 
             Type X to quit or <RETURN> to proceed,
-            or enter new name. (Default extension: sty)
+            or enter new name.  (Default extension: sty)
 
             Enter file name:
             ! Emergency stop.

@@ -108,30 +108,42 @@
 ;;    tlmgr install collection-langcjk collection-langchinese ctex ctex-faq bibtex8 environ trimspaces zhnumber wrapfig capt-of latexmk dvipng dvisvgm
 ;;    #+END_EXAMPLE
 
-;; ** 安装并配置 org2ctex
-;; *** 安装
+;; ** 安装 org2ctex
 ;; 1. 配置 melpa: http://melpa.org/#/getting-started
 ;; 2. M-x package-install RET org2ctex RET
 
-;; *** 配置
+;; ** 配置 org2ctex
 ;; #+BEGIN_EXAMPLE
 ;; (require 'org2ctex)
 ;; (org2ctex-toggle t)
 ;; #+END_EXAMPLE
 
-;; 注：用户可以使用 `org2ctex-insert-configure-template' 在当前 buffer 的光标处
+;; ** 高级设置
+
+;; *** 如何选择默认 class
+;; 设置变量 `org2ctex-latex-default-class', 默认有四个选项
+;; 可以选择: "ctexart", "ctexrep", "ctexbook" 和 "beamer",
+;; 用户可以通过设置 `org2ctex-latex-classes' 来添加更多的
+;; class 配置。
+
+;; *** 如何添加 Latex 宏包
+;; 设置 `org2ctex-latex-packages-alist', 这个变量的设置方式和
+;; `org-latex-packages-alist' 一样，请参考 org 手册。
+
+;; *** 如何导出 org2ctex 的配置
+;; 使用 `org2ctex-insert-configure-template' 在当前 buffer 的光标处
 ;; 插入一段 Emacs 配置代码, 这段 elisp 代码的功能和 org2ctex 的功能
 ;; *基本一样* , 用户可以把这段代码做为自己的 org 中文配置来进一步调整优化。
 
-;; ** 禁用自动设置 LaTeX 字体功能
-;; org2ctex 默认会搜索当前系统 *可用* 的字体，来自动设置 LaTeX 字体，
+;; *** 如何禁用自动设置 LaTeX 字体功能
+;; Org2ctex 默认会搜索当前系统 *可用* 的字体，来自动设置 LaTeX 字体，
 ;; 但字体显示效果未必好，用户可以使用下面的代码来禁用这个功能。
 
 ;; #+BEGIN_EXAMPLE
 ;; (setq org2ctex-latex-fonts nil)
 ;; #+END_EXAMPLE
 
-;; ** 设置 LaTeX 片断预览功能
+;; ** 如何设置 LaTeX 片断预览功能
 ;; 1. 确保 Emacs 可以显示 png 文件，具体参考：ftp://ftp.gnu.org/gnu/emacs/windows/README
 ;; 2. 安装 [[http://www.imagemagick.org/][imagemagick]] 和 [[http://ghostscript.com/][ghostscript]]
 ;; 3. 设置 Emacs

@@ -120,7 +120,7 @@
 ;; #+END_EXAMPLE
 
 ;; 注：用户可以使用 `org2ctex-insert-configure-template' 在当前 buffer 的光标处
-;; 插入一段 emacs 配置代码, 这段 elisp 代码的功能和 org2ctex 的功能
+;; 插入一段 Emacs 配置代码, 这段 elisp 代码的功能和 org2ctex 的功能
 ;; *基本一样* , 用户可以把这段代码做为自己的 org 中文配置来进一步调整优化。
 
 ;; ** 禁用自动设置 LaTeX 字体功能
@@ -132,9 +132,9 @@
 ;; #+END_EXAMPLE
 
 ;; ** 设置 LaTeX 片断预览功能
-;; 1. 确保 emacs 可以显示 png 文件，具体参考：ftp://ftp.gnu.org/gnu/emacs/windows/README
+;; 1. 确保 Emacs 可以显示 png 文件，具体参考：ftp://ftp.gnu.org/gnu/emacs/windows/README
 ;; 2. 安装 [[http://www.imagemagick.org/][imagemagick]] 和 [[http://ghostscript.com/][ghostscript]]
-;; 3. 设置 emacs
+;; 3. 设置 Emacs
 ;;    #+BEGIN_EXAMPLE
 ;;    ;; (setq org-latex-create-formula-image-program 'dvipng)    ;速度很快，但 *默认* 不支持中文
 ;;    (setq org-latex-create-formula-image-program 'imagemagick)  ;速度较慢，但支持中文
@@ -175,7 +175,7 @@
 ;;     ! LaTeX Error: File `wrapfig.sty' not found.
 
 ;;     Type X to quit or <RETURN> to proceed,
-;;     or enter new name. (Default extension: sty)
+;;     or enter new name.  (Default extension: sty)
 
 ;;     Enter file name:
 ;;     ! Emergency stop.
@@ -238,10 +238,11 @@
 
 (defcustom org2ctex-latex-preview-commands
   '("xelatex -interaction nonstopmode -output-directory %o %f")
-  "Set latex commands used for preview latex snippet, which will be
-used by `org2ctex-latex-compile'.
+  "Override `org-latex-preview-commands'.
 
-Note: this option *only* useful for org-mode (version < 9.0) ."
+It will be used by `org2ctex-latex-compile'.
+
+Note: this option *only* useful for ‘org-mode’ (version < 9.0) ."
   :group 'org-export-latex-chinese)
 
 (defcustom org2ctex-preview-latex-process-alist
@@ -286,23 +287,31 @@ Note: this option *only* useful for org-mode (version < 9.0) ."
      :latex-compiler ("xelatex -interaction nonstopmode -output-directory %o %f")
      :image-converter
      ("convert -density %D -trim -antialias %f -quality 100 %O")))
-  "Please see the info of `org-preview-latex-process-alist', when `org2ctex-latex-chinese-enable'
-set to t, its value will override the value of `org-preview-latex-process-alist' before exporting
-to latex.
+  "Override `org-preview-latex-process-alist'.
 
-Note: this option is useful for org-mode (version >= 9.0 )."
+Please see the info of `org-preview-latex-process-alist',
+when `org2ctex-enable' set to t, its value will override
+the value of `org-preview-latex-process-alist' before
+exporting to latex.
+
+Note: this option is useful for ‘org-mode’ (version >= 9.0 )."
   :group 'org-export-latex-chinese)
 
 (defcustom org2ctex-latex-default-class "ctexart"
-  "Please see the info of `org-latex-default-class', when `org2ctex-latex-chinese-enable'
-set to t, its value will override the value of `org-latex-default-class' before exporting
-to latex."
+  "Default ctex class when export org to LaTeX.
+
+Please see the info of `org-latex-default-class',
+when `org2ctex-enable' set to t, its value will override
+the value of `org-latex-default-class' before exporting to latex."
   :group 'org-export-latex-chinese)
 
 (defcustom org2ctex-preview-latex-default-process 'dvipng
-  "Please see the info of `org-preview-latex-default-process', when `org2ctex-latex-chinese-enable'
-set to t, its value will override the value of `org-preview-latex-default-process' before exporting
-to latex."
+  "Override `org-preview-latex-default-process'.
+
+Please see the info of `org-preview-latex-default-process',
+when `org2ctex-enable' set to t, its value will override
+the value of `org-preview-latex-default-process' before
+exporting to latex."
   :group 'org-export-latex-chinese)
 
 (defcustom org2ctex-latex-classes
@@ -331,9 +340,11 @@ to latex."
      "\\documentclass{beamer}
                \\usepackage[fontset=none,UTF8,a4paper,zihao=-4]{ctex}"
      org-beamer-sectioning))
-  "Please see the info of `org-latex-classes', when `org2ctex-latex-chinese-enable'
-set to t, its value will override the value of `org2ctex-latex-classes' before exporting
-to latex."
+  "Override `org-latex-classes'.
+
+Please see the info of `org-latex-classes',
+when `org2ctex-enable' set to t, its value will override
+the value of `org2ctex-latex-classes' before exporting to latex."
   :group 'org-export-latex-chinese)
 
 (defcustom org2ctex-latex-default-packages-alist
@@ -341,12 +352,15 @@ to latex."
           (remove '("T1" "fontenc" t)
                   (remove '("AUTO" "inputenc" t)
                           org-latex-default-packages-alist)))
-  "Please see the info of `org-latex-default-packages-alist', when `org2ctex-latex-chinese-enable'
-set to t, its value will override the value of `org-latex-default-packages-alist' before exporting
-to latex.
+  "Override `org-latex-default-packages-alist'.
 
-org 不建议自定义 org-latex-default-package-alist 变量，但 'inputenc' and 'fontenc'
-两个宏包似乎和 xelatex 有冲突，调整！"
+Please see the info of `org-latex-default-packages-alist',
+when `org2ctex-enable' set to t, its value will override
+the value of `org-latex-default-packages-alist' before
+exporting to latex.
+
+org 不建议自定义 org-latex-default-package-alist 变量，但
+'inputenc' and 'fontenc' 两个宏包似乎和 xelatex 有冲突，调整！"
   :group 'org-export-latex-chinese)
 
 (defcustom  org2ctex-latex-packages-alist
@@ -359,9 +373,12 @@ org 不建议自定义 org-latex-default-package-alist 变量，但 'inputenc' a
 
 %%% 设置页面边距 %%%
 \\usepackage[top=2.54cm, bottom=2.54cm, left=3.17cm, right=3.17cm]{geometry} %")
-  "Please see the info of `org-latex-packages-alist', when `org2ctex-latex-chinese-enable'
-set to t, its value will override the value of `org-latex-packages-alist' before exporting
-to latex."
+  "Override `org-latex-packages-alist'.
+
+Please see the info of `org-latex-packages-alist',
+when `org2ctex-enable' set to t, its value will override
+the value of `org-latex-packages-alist'
+before exporting to latex."
   :group 'org-export-latex-chinese)
 
 ;; latex公式预览, 调整latex预览时使用的header,默认使用ctexart类
@@ -370,9 +387,12 @@ to latex."
    "\\\\documentclass{.*}"
    "\\\\documentclass[nofonts,UTF8]{ctexart}"
    org-format-latex-header)
-  "Please see the info of `org-format-latex-header', when `org2ctex-latex-chinese-enable'
-set to t, its value will override the value of `org-format-latex-header' before exporting
-to latex."
+  "Override `org-format-latex-header'.
+
+Please see the info of `org-format-latex-header',
+when `org2ctex-enable' set to t, its value will override
+the value of `org-format-latex-header' before
+exporting to latex."
   :group 'org-export-latex-chinese)
 
 (defvar org2ctex-enable nil
@@ -386,7 +406,7 @@ to latex."
     org-latex-default-packages-alist
     org-preview-latex-process-alist
     org-preview-latex-default-process)
-  "记录所有被 org2ctex 包强制覆盖得变量。")
+  "记录所有被 org2ctex 包强制覆盖得变量.")
 
 (defun org2ctex-generate-latex-fonts-setting ()
   "Generate a latex fonts setting."
@@ -406,6 +426,9 @@ to latex."
               (when cjkmonofont (format "\\setCJKmonofont{%s}\n" cjkmonofont))))))
 
 (defun org2ctex-get-available-font (fontclass)
+  "获取可用字体.
+
+Argument FONTCLASS"
   (when org2ctex-latex-fonts
     (let* ((fonts-list (cdr (assoc fontclass org2ctex-latex-fonts)))
            (font (car (cl-remove-if
@@ -418,6 +441,7 @@ to latex."
       font)))
 
 (defun org2ctex-font-available-p (fontname)
+  "测试 FONTNAME 是否是一个可用字体."
   (mapcar #'(lambda (x)
               (substring-no-properties x))
           (delq nil (mapcar
@@ -428,6 +452,9 @@ to latex."
                      (font-family-list)))))
 
 (defun org2ctex-insert-setq-sexp (variable &optional value)
+  "在当前 buffer 中插入一个 setq 表达式.
+
+这个表达式中，变量位置插入 VARIABLE, 取值位置插入 VALUE."
   (let ((value (or value
                    (symbol-value
                     (intern (concat "org2ctex-" (symbol-name variable)))))))
@@ -447,6 +474,7 @@ to latex."
            (t (format "(setq %S %S)\n" variable value))))))
 
 (defun org2ctex-insert-configure-template ()
+  "依据 org2ctex 的设置，在当前 buffer 中插入一个对应的 org latex 配置."
   (interactive)
   (when (yes-or-no-p "是否在光标处插入一个 org 中文配置模板（根据 org2ctex 的设置生成）？ ")
     (insert (with-temp-buffer
@@ -458,12 +486,12 @@ to latex."
                            org-latex-default-packages-alist))
                 (org2ctex-insert-setq-sexp x))
               (org2ctex-insert-setq-sexp 'org-latex-pdf-process
-                                     org2ctex-latex-commands)
+                                         org2ctex-latex-commands)
               (org2ctex-insert-setq-sexp 'org-latex-packages-alist
-                                     (if (org2ctex-generate-latex-fonts-setting)
-                                         (cons (org2ctex-generate-latex-fonts-setting)
-                                               org2ctex-latex-packages-alist)
-                                       org2ctex-latex-packages-alist))
+                                         (if (org2ctex-generate-latex-fonts-setting)
+                                             (cons (org2ctex-generate-latex-fonts-setting)
+                                                   org2ctex-latex-packages-alist)
+                                           org2ctex-latex-packages-alist))
               (unless (string< (org-version) "9.0")
                 (org2ctex-insert-setq-sexp 'org-preview-latex-default-process)
                 (org2ctex-insert-setq-sexp 'org-preview-latex-process-alist))
@@ -471,6 +499,7 @@ to latex."
               (buffer-string)))))
 
 (defmacro org2ctex-if (cond expression1 expression2)
+  "如果 COND 为 t, 在一个 org2ctex 环境中执行 EXPRESSION1 表达式，否则执行 EXPRESSION2."
   (declare (indent 1))
   `(if ,cond
        (let ((org-latex-default-class org2ctex-latex-default-class)
@@ -489,17 +518,27 @@ to latex."
 
 (defun org2ctex-export-as (orig-fun backend &optional subtreep
                                     visible-only body-only ext-plist)
+  "Org2ctex 化的 `org-export-as, 做为 advice 函数使用.
+
+Argument ORIG-FUN, BACKEND,
+Optional argument SUBTREEP, VISIBLE-ONLY, BODY-ONLY, EXT-PLIST."
   (org2ctex-if (and org2ctex-enable
                     (member backend '(latex beamer)))
                (funcall orig-fun backend subtreep visible-only body-only ext-plist)
                (funcall orig-fun backend subtreep visible-only body-only ext-plist)))
 
 (defun org2ctex-create-formula-image-with-imagemagick (orig-fun string tofile options buffer)
+  "Org2ctex 化的 `org-create-formula-image-with-imagemagick', advice 函数.
+
+Argument: ORIG-FUN STRING TOFILE OPTIONS BUFFER."
   (org2ctex-if org2ctex-enable
                (funcall orig-fun string tofile options buffer)
                (funcall orig-fun string tofile options buffer)))
 
 (defun org2ctex-latex-compile (orig-fun texfile &optional snippet)
+  "Org2ctex 化的 `org-latex-compile', advice 函数.
+
+Argument: ORIG-FUN TEXFILE SNIPPET."
   (org2ctex-if org2ctex-enable
                (let ((org-latex-pdf-process
                       (if snippet
@@ -509,7 +548,9 @@ to latex."
                (funcall orig-fun texfile snippet)))
 
 (defun org2ctex-toggle (&optional force-enable)
-  "启用/禁用 org2ctex 包。"
+  "启用/禁用 org2ctex 包.
+
+如果 FORCE-ENABLE is t, 强制启用 org2ctex."
   (interactive)
   (setq org2ctex-enable
         (or force-enable (not org2ctex-enable)))

@@ -556,14 +556,14 @@ Argument: ORIG-FUN TEXFILE SNIPPET."
         (or force-enable (not org2ctex-enable)))
   (if org2ctex-enable
       (progn
-        (message (concat "org2ctex is enabled, force *override*："
+        (message (concat "Org2ctex is enabled, force *override*："
                          (mapconcat #'symbol-name org2ctex-overrided-variables ", ")
                          "."))
         (advice-add 'org-export-as :around #'org2ctex-export-as)
         (advice-add 'org-create-formula-image-with-imagemagick
                     :around #'org2ctex-create-formula-image-with-imagemagick)
         (advice-add 'org-latex-compile :around #'org2ctex-latex-compile))
-    (message "org2ctex is disabled.")
+    (message "Org2ctex is disabled.")
     (advice-remove 'org-export-as #'org2ctex-export-as)
     (advice-remove 'org-create-formula-image-with-imagemagick
                    #'org2ctex-create-formula-image-with-imagemagick)

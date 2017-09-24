@@ -208,6 +208,7 @@
 (require 'org)
 (require 'ox)
 (require 'ox-latex)
+(require 'cl-lib)
 (require 'cl-extra)
 
 (defgroup org-export-latex-chinese nil

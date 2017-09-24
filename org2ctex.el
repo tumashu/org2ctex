@@ -7,7 +7,7 @@
 ;; Author: Feng Shu <tumashu@163.com>
 ;; URL: https://github.com/tumashu/org2ctex
 ;; Version: 0.0.1
-;; Package-Requires: ((emacs "24.4") (cl-lib "0.5"))
+;; Package-Requires: ((emacs "24.4"))
 
 ;; License:
 

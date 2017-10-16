@@ -1,30 +1,32 @@
-- [README](#org7cf6e88)
-  - [简介](#orga5304c4)
-  - [下载并安装 Texlive](#orgde0be27)
-    - [下载 Tex Live ISO 镜像](#org8963659)
-    - [挂载已经下载的 ISO 镜像](#org60183b7)
-    - [运行安装程序](#orgeca7690)
-    - [设置安装参数](#org0eca74c)
-    - [安装所需要的 Latex 宏包](#org845b155)
-  - [安装 org2ctex](#orgc6a8bca)
-  - [配置 org2ctex](#orgab12b1c)
-  - [高级设置](#orga8cb22b)
-    - [如何选择默认 class](#orgc07a9ed)
-    - [如何添加 Latex 宏包](#orgd439e07)
-    - [如何导出 org2ctex 的配置](#orgca0b839)
-    - [如何禁用自动设置 LaTeX 字体功能](#orge984eee)
-  - [如何设置 LaTeX 片断预览功能](#orge7c3598)
-  - [常见错误排查和解决](#orgcadff82)
-    - [中文目录下的 org 文件无法转换为 pdf 文件](#orgdc66df1)
-    - [缺少必要的 Latex 宏包](#orgaa0461f)
+- [README](#org5739f8e)
+  - [简介](#org748c678)
+  - [下载并安装 Texlive](#org7be969f)
+    - [下载 Tex Live ISO 镜像](#org1fae00a)
+    - [挂载已经下载的 ISO 镜像](#org434f39b)
+    - [运行安装程序](#org85b80d3)
+    - [设置安装参数](#org23e6be5)
+    - [安装所需要的 Latex 宏包](#orga74848f)
+  - [安装 org2ctex](#org4703075)
+  - [配置 org2ctex](#org88af0e6)
+  - [高级设置](#org04284a2)
+    - [如何选择默认 class](#org97f5f1e)
+    - [如何添加 Latex 宏包](#org12c9365)
+    - [如何导出 org2ctex 的配置](#org43e69a6)
+    - [如何禁用自动设置 LaTeX 字体功能](#orgca1f482)
+  - [如何设置 LaTeX 片断预览功能](#orgdfea681)
+  - [常见错误排查和解决](#org687ff74)
+    - [我使用 MSYS2 内置的 Emacs, 无法找到 texlive 相关的命令](#org25e59ec)
+    - [转换时字体名字乱码](#orga213bfc)
+    - [中文目录下的 org 文件无法转换为 pdf 文件](#org3b7f45e)
+    - [缺少必要的 Latex 宏包](#orgbc85e16)
 
 
-<a id="org7cf6e88"></a>
+<a id="org5739f8e"></a>
 
 # README
 
 
-<a id="orga5304c4"></a>
+<a id="org748c678"></a>
 
 ## 简介
 
@@ -41,12 +43,12 @@ org2ctex 是一个 org-mode 工具，它可以帮助 org-mode 中文用户简单
 ![img](./snapshots/org2ctex.gif)
 
 
-<a id="orgde0be27"></a>
+<a id="org7be969f"></a>
 
 ## 下载并安装 Texlive
 
 
-<a id="org8963659"></a>
+<a id="org1fae00a"></a>
 
 ### 下载 Tex Live ISO 镜像
 
@@ -58,7 +60,7 @@ Tex Live 主站访问速度很慢，建议同学们使用国内镜像，许多 L
 2.  清华大学镜像：<http://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/Images/>
 
 
-<a id="org60183b7"></a>
+<a id="org434f39b"></a>
 
 ### 挂载已经下载的 ISO 镜像
 
@@ -66,7 +68,7 @@ Tex Live 主站访问速度很慢，建议同学们使用国内镜像，许多 L
 2.  将 ISO 镜像挂载到 “Z:\\”
 
 
-<a id="orgeca7690"></a>
+<a id="org85b80d3"></a>
 
 ### 运行安装程序
 
@@ -77,7 +79,7 @@ Tex Live 主站访问速度很慢，建议同学们使用国内镜像，许多 L
 注：安装的时候建议关闭杀毒软件。
 
 
-<a id="org0eca74c"></a>
+<a id="org23e6be5"></a>
 
 ### 设置安装参数
 
@@ -86,7 +88,7 @@ Tex Live 主站访问速度很慢，建议同学们使用国内镜像，许多 L
 ![img](./snapshots/advanced-install.gif)
 
 
-<a id="org845b155"></a>
+<a id="orga74848f"></a>
 
 ### 安装所需要的 Latex 宏包
 
@@ -112,7 +114,7 @@ Tex Live 主站访问速度很慢，建议同学们使用国内镜像，许多 L
             tlmgr install collection-langcjk collection-langchinese ctex ctex-faq bibtex8 environ trimspaces zhnumber wrapfig capt-of latexmk dvipng dvisvgm
 
 
-<a id="orgc6a8bca"></a>
+<a id="org4703075"></a>
 
 ## 安装 org2ctex
 
@@ -120,7 +122,7 @@ Tex Live 主站访问速度很慢，建议同学们使用国内镜像，许多 L
 2.  M-x package-install RET org2ctex RET
 
 
-<a id="orgab12b1c"></a>
+<a id="org88af0e6"></a>
 
 ## 配置 org2ctex
 
@@ -128,33 +130,33 @@ Tex Live 主站访问速度很慢，建议同学们使用国内镜像，许多 L
     (org2ctex-toggle t)
 
 
-<a id="orga8cb22b"></a>
+<a id="org04284a2"></a>
 
 ## 高级设置
 
 
-<a id="orgc07a9ed"></a>
+<a id="org97f5f1e"></a>
 
 ### 如何选择默认 class
 
 设置变量 \`org2ctex-latex-default-class', 默认有四个选项 可以选择: "ctexart", "ctexrep", "ctexbook" 和 "beamer", 用户可以通过设置 \`org2ctex-latex-classes' 来添加更多的 class 配置。
 
 
-<a id="orgd439e07"></a>
+<a id="org12c9365"></a>
 
 ### 如何添加 Latex 宏包
 
 设置 \`org2ctex-latex-packages-alist', 这个变量的设置方式和 \`org-latex-packages-alist' 一样，请参考 org 手册。
 
 
-<a id="orgca0b839"></a>
+<a id="org43e69a6"></a>
 
 ### 如何导出 org2ctex 的配置
 
 使用 \`org2ctex-insert-configure-template' 在当前 buffer 的光标处 插入一段 Emacs 配置代码, 这段 elisp 代码的功能和 org2ctex 的功能 **基本一样** , 用户可以把这段代码做为自己的 org 中文配置来进一步调整优化。
 
 
-<a id="orge984eee"></a>
+<a id="orgca1f482"></a>
 
 ### 如何禁用自动设置 LaTeX 字体功能
 
@@ -163,7 +165,7 @@ Org2ctex 默认会搜索当前系统 **可用** 的字体，来自动设置 LaTe
     (setq org2ctex-latex-fonts nil)
 
 
-<a id="orge7c3598"></a>
+<a id="orgdfea681"></a>
 
 ## 如何设置 LaTeX 片断预览功能
 
@@ -179,12 +181,30 @@ Org2ctex 默认会搜索当前系统 **可用** 的字体，来自动设置 LaTe
               (plist-put org-format-latex-options :html-scale 2.5)) ;调整 HTML 文件中 LaTeX 图像的大小
 
 
-<a id="orgcadff82"></a>
+<a id="org687ff74"></a>
 
 ## 常见错误排查和解决
 
 
-<a id="orgdc66df1"></a>
+<a id="org25e59ec"></a>
+
+### 我使用 MSYS2 内置的 Emacs, 无法找到 texlive 相关的命令
+
+MSYS2 默认不读取 window 系统的 PATH 设置，用户可以更改 MSYS2 的快捷方式，为快捷方式添加 "-full-path" 参数 （右击快捷方式，选择 “属性”，更改 “目标”）
+
+比如：
+
+    "C:\msys32\msys2_shell.cmd -mingw32 -full-path"
+
+
+<a id="orga213bfc"></a>
+
+### 转换时字体名字乱码
+
+确保 org 源文件保存为 UTF-8 格式，GBK 格式的文件处理起来有问题。
+
+
+<a id="org3b7f45e"></a>
 
 ### 中文目录下的 org 文件无法转换为 pdf 文件
 
@@ -193,7 +213,7 @@ Org2ctex 默认会搜索当前系统 **可用** 的字体，来自动设置 LaTe
     (setq org2ctex-latex-commands '("latexmk -xelatex -gg -pdf %b.tex"))
 
 
-<a id="orgaa0461f"></a>
+<a id="orgbc85e16"></a>
 
 ### 缺少必要的 Latex 宏包
 

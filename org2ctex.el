@@ -485,7 +485,8 @@ Argument FONTCLASS"
 这个表达式中，变量位置插入 VARIABLE, 取值位置插入 VALUE."
   (let ((value (or value
                    (symbol-value
-                    (intern (concat "org2ctex-" (symbol-name variable)))))))
+                    (intern (replace-regexp-in-string
+                             "^org-" "org2ctex-" (symbol-name variable)))))))
     (insert
      (cond ((stringp value) (format "(setq %S %S)\n" variable value))
            ((symbolp value) (format "(setq %S '%S)\n" variable value))

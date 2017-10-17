@@ -245,14 +245,14 @@
 
 (defcustom org2ctex-latex-fonts
   '((mainfont "Times New Roman")
-    (CJKmainfont "SimSun" "宋体" "新宋体" "宋体" "STSong" "STZhongson" "华文中宋")
-    (CJKmainfont-italic "KaiTi_GB2312" "楷体" "KaiTi" "楷体_GB2312" "STKaiti" "华文行楷")
-    (CJKsansfont "WenQuanYi Micro Hei" "文泉驿微米黑" "文泉驿等宽微米黑" "微软雅黑"
-                 "Microsoft Yahei" "Microsoft_Yahei"  "文泉驿等宽正黑" "黑体"
-                 "文泉驿正黑" "文泉驿点阵正黑" "SimHei" "华文细黑")
-    (CJKmonofont "WenQuanYi Micro Hei" "文泉驿微米黑" "文泉驿等宽微米黑" "微软雅黑"
-                 "Microsoft Yahei" "Microsoft_Yahei"  "文泉驿等宽正黑" "黑体"
-                 "文泉驿正黑" "文泉驿点阵正黑" "SimHei" "华文细黑"))
+    (CJKmainfont "SimSun" "STSong" "STZhongson" "宋体" "新宋体" "宋体" "华文中宋")
+    (CJKmainfont-italic "KaiTi_GB2312" "KaiTi" "STKaiti" "楷体" "楷体_GB2312" "华文行楷")
+    (CJKsansfont "Microsoft Yahei" "Microsoft_Yahei" "WenQuanYi Micro Hei" "SimHei"
+                 "文泉驿微米黑" "文泉驿等宽微米黑" "微软雅黑" "文泉驿等宽正黑" "黑体"
+                 "文泉驿正黑" "文泉驿点阵正黑" "华文细黑")
+    (CJKmonofont "WenQuanYi Micro Hei" "Microsoft Yahei" "Microsoft_Yahei" "SimHei"
+                 "文泉驿微米黑" "文泉驿等宽微米黑" "微软雅黑" "文泉驿等宽正黑" "黑体"
+                 "文泉驿正黑" "文泉驿点阵正黑" "华文细黑"))
   "Set fonts candidates which will used by latex."
   :group 'org-export-latex-chinese)
 

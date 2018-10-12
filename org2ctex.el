@@ -365,9 +365,11 @@ exporting to latex."
      ("\\subsection{%s}" . "\\subsection*{%s}")
      ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))
     ("beamer"
-     "\\documentclass{beamer}
-               \\usepackage[fontset=none,UTF8,a4paper,zihao=-4]{ctex}"
-     org-beamer-sectioning))
+     "\\documentclass[presentation]{beamer}
+\\usepackage[fontset=none,UTF8,a4paper,zihao=-4]{ctex}"
+     ("\\section{%s}" . "\\section*{%s}")
+	 ("\\subsection{%s}" . "\\subsection*{%s}")
+	 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
   "Override `org-latex-classes'.
 
 Please see the info of `org-latex-classes',

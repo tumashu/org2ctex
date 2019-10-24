@@ -425,7 +425,7 @@ the value of `org-format-latex-header' before
 exporting to latex."
   :group 'org-export-latex-chinese)
 
-(defvar org2ctex-enable nil
+(defvaralias 'org2ctex-enable 'org2ctex-mode
   "判断是否开启 org2ctex.")
 
 (defconst org2ctex-overrided-variables
@@ -578,27 +578,36 @@ Argument: ORIG-FUN TEXFILE SNIPPET."
                  (funcall orig-fun texfile snippet))
                (funcall orig-fun texfile snippet)))
 
-(defun org2ctex-toggle (&optional force-enable)
-  "启用/禁用 org2ctex 包.
-
-如果 FORCE-ENABLE is t, 强制启用 org2ctex."
-  (interactive)
-  (setq org2ctex-enable
-        (or force-enable (not org2ctex-enable)))
-  (if org2ctex-enable
+(define-minor-mode org2ctex-mode
+  "org2ctex 配置模式."
+  (if org2ctex-mode
       (progn
-        (message (concat "Org2ctex is enabled, force *override*："
+        (message (concat "[Org2ctex] Force *override*："
                          (mapconcat #'symbol-name org2ctex-overrided-variables ", ")
                          "."))
         (advice-add 'org-export-as :around #'org2ctex-export-as)
         (advice-add 'org-create-formula-image-with-imagemagick
                     :around #'org2ctex-create-formula-image-with-imagemagick)
         (advice-add 'org-latex-compile :around #'org2ctex-latex-compile))
-    (message "Org2ctex is disabled.")
     (advice-remove 'org-export-as #'org2ctex-export-as)
     (advice-remove 'org-create-formula-image-with-imagemagick
                    #'org2ctex-create-formula-image-with-imagemagick)
     (advice-remove 'org-latex-compile #'org2ctex-latex-compile)))
+
+;; Backward compatibility
+
+(defun org2ctex-toggle (&optional force-enable)
+  "启用/禁用 org2ctex 包.
+
+如果 FORCE-ENABLE is t, 强制启用 org2ctex."
+  (interactive)
+  (let ((arg (cond
+               (force-enable 1)
+               (org2ctex-mode -1)
+               (t 1))))
+    (org2ctex-mode arg)))
+
+(make-obsolete 'org2ctex-toggle 'org2ctex-mode nil)
 
 (provide 'org2ctex)
 

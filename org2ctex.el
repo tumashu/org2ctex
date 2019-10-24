@@ -580,9 +580,11 @@ Argument: ORIG-FUN TEXFILE SNIPPET."
 
 (define-minor-mode org2ctex-mode
   "org2ctex 配置模式."
+  :init-value nil
+  :global t
   (if org2ctex-mode
       (progn
-        (message (concat "[Org2ctex] Force *override*："
+        (message (concat "Org2ctex mode is enabled, force *override*："
                          (mapconcat #'symbol-name org2ctex-overrided-variables ", ")
                          "."))
         (advice-add 'org-export-as :around #'org2ctex-export-as)

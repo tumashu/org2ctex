@@ -1,4 +1,4 @@
-;;; org2ctex.el --- Export org to ctex (a latex macro for Chinese)
+;;; org2ctex.el --- Export org to ctex (a latex macro for Chinese)    -*- lexical-binding: t; -*-
 
 ;; * Header
 ;; #+BEGIN_EXAMPLE

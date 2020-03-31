@@ -254,7 +254,11 @@
                  "文泉驿微米黑" "文泉驿等宽微米黑" "微软雅黑" "文泉驿等宽正黑" "黑体"
                  "文泉驿正黑" "文泉驿点阵正黑" "华文细黑"))
   "Set fonts candidates which will used by latex."
-  :group 'org-export-latex-chinese)
+  :group 'org-export-latex-chinese
+  :type '(choice (const :tag "None" nil)
+                 (list (repeat :tag "English fonts" string)
+                       (repeat :tag "Chinese fonts" string)
+                       (repeat :tag "Ext-B fonts" string))))
 
 (defcustom org2ctex-latex-commands
   '("xelatex -interaction nonstopmode -output-directory %o %f"
@@ -262,7 +266,8 @@
     "xelatex -interaction nonstopmode -output-directory %o %f"
     "xelatex -interaction nonstopmode -output-directory %o %f")
   "Set latex commands which will be used by `org2ctex-latex-compile'."
-  :group 'org-export-latex-chinese)
+  :group 'org-export-latex-chinese
+  :type '(repeat string))
 
 (defcustom org2ctex-latex-preview-commands
   '("xelatex -interaction nonstopmode -output-directory %o %f")
@@ -271,7 +276,8 @@
 It will be used by `org2ctex-latex-compile'.
 
 Note: this option *only* useful for ‘org-mode’ (version < 9.0) ."
-  :group 'org-export-latex-chinese)
+  :group 'org-export-latex-chinese
+  :type '(repeat string))
 
 (defcustom org2ctex-preview-latex-process-alist
   '((dvipng
@@ -323,7 +329,9 @@ the value of `org-preview-latex-process-alist' before
 exporting to latex.
 
 Note: this option is useful for ‘org-mode’ (version >= 9.0 )."
-  :group 'org-export-latex-chinese)
+  :group 'org-export-latex-chinese
+  :type '(alist :tag "LaTeX to image backends"
+		:value-type (plist)))
 
 (defcustom org2ctex-latex-default-class "ctexart"
   "Default ctex class when export org to LaTeX.
@@ -331,7 +339,8 @@ Note: this option is useful for ‘org-mode’ (version >= 9.0 )."
 Please see the info of `org-latex-default-class',
 when `org2ctex-enable' set to t, its value will override
 the value of `org-latex-default-class' before exporting to latex."
-  :group 'org-export-latex-chinese)
+  :group 'org-export-latex-chinese
+  :type '(string :tag "Ctex class"))
 
 (defcustom org2ctex-preview-latex-default-process 'dvipng
   "Override `org-preview-latex-default-process'.
@@ -340,7 +349,8 @@ Please see the info of `org-preview-latex-default-process',
 when `org2ctex-enable' set to t, its value will override
 the value of `org-preview-latex-default-process' before
 exporting to latex."
-  :group 'org-export-latex-chinese)
+  :group 'org-export-latex-chinese
+  :type 'symbol)
 
 (defcustom org2ctex-latex-classes
   '(("ctexart"
@@ -368,14 +378,28 @@ exporting to latex."
      "\\documentclass[presentation]{beamer}
 \\usepackage[fontset=none,UTF8,a4paper,zihao=-4]{ctex}"
      ("\\section{%s}" . "\\section*{%s}")
-	 ("\\subsection{%s}" . "\\subsection*{%s}")
-	 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
+     ("\\subsection{%s}" . "\\subsection*{%s}")
+     ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
   "Override `org-latex-classes'.
 
 Please see the info of `org-latex-classes',
 when `org2ctex-enable' set to t, its value will override
 the value of `org2ctex-latex-classes' before exporting to latex."
-  :group 'org-export-latex-chinese)
+  :group 'org-export-latex-chinese
+  :type '(repeat
+	  (list (string :tag "LaTeX class")
+		(string :tag "LaTeX header")
+		(repeat :tag "Levels" :inline t
+			(choice
+			 (cons :tag "Heading"
+			       (string :tag "  numbered")
+			       (string :tag "unnumbered"))
+			 (list :tag "Environment"
+			       (string :tag "Opening   (numbered)")
+			       (string :tag "Closing   (numbered)")
+			       (string :tag "Opening (unnumbered)")
+			       (string :tag "Closing (unnumbered)"))
+			 (function :tag "Hook computing sectioning"))))))
 
 (defcustom org2ctex-latex-default-packages-alist
   (remove '("normalem" "ulem" t)
@@ -391,7 +415,17 @@ exporting to latex.
 
 org 不建议自定义 org-latex-default-package-alist 变量，但
 'inputenc' and 'fontenc' 两个宏包似乎和 xelatex 有冲突，调整！"
-  :group 'org-export-latex-chinese)
+  :group 'org-export-latex-chinese
+  :type '(repeat
+	  (choice
+	   (list :tag "options/package pair"
+		 (string :tag "options")
+		 (string :tag "package")
+		 (boolean :tag "Snippet")
+		 (choice
+		  (const :tag "For all compilers" nil)
+		  (repeat :tag "Allowed compiler" string)))
+	   (string :tag "A line of LaTeX"))))
 
 (defcustom  org2ctex-latex-packages-alist
   (list
@@ -409,7 +443,14 @@ Please see the info of `org-latex-packages-alist',
 when `org2ctex-enable' set to t, its value will override
 the value of `org-latex-packages-alist'
 before exporting to latex."
-  :group 'org-export-latex-chinese)
+  :group 'org-export-latex-chinese
+  :type '(repeat
+	  (choice
+	   (list :tag "options/package pair"
+		 (string :tag "options")
+		 (string :tag "package")
+		 (boolean :tag "Snippet"))
+	   (string :tag "A line of LaTeX"))))
 
 ;; latex公式预览, 调整latex预览时使用的header,默认使用ctexart类
 (defcustom org2ctex-format-latex-header
@@ -423,7 +464,8 @@ Please see the info of `org-format-latex-header',
 when `org2ctex-enable' set to t, its value will override
 the value of `org-format-latex-header' before
 exporting to latex."
-  :group 'org-export-latex-chinese)
+  :group 'org-export-latex-chinese
+  :type 'string)
 
 (defvaralias 'org2ctex-enable 'org2ctex-mode
   "判断是否开启 org2ctex.")
